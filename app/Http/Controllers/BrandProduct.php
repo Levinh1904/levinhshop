@@ -28,7 +28,7 @@ class BrandProduct extends Controller
         $this->AuthLogin();
         //$all_brand_product = DB::table('tbl_brand')->get(); //static huong doi tuong
         // $all_brand_product = Brand::all();
-        $all_brand_product = Brand::orderBy('brand_id','DESC')->paginate(2);
+        $all_brand_product = Brand::orderBy('brand_id','DESC')->paginate(6);
         $manager_brand_product  = view('admin.all_brand_product')->with('all_brand_product',$all_brand_product);
         return view('admin_layout')->with('admin.all_brand_product', $manager_brand_product);
 
@@ -37,23 +37,25 @@ class BrandProduct extends Controller
     public function save_brand_product(Request $request){
         $this->AuthLogin();
         $data = $request->all();
-
-        $brand = new Brand();
-        $brand->brand_name = $data['brand_product_name'];
-        $brand->brand_slug = $data['brand_slug'];
-        $brand->brand_desc = $data['brand_product_desc'];
-        $brand->brand_status = $data['brand_product_status'];
-        $brand->save();
-
-        // $data = array();
-        // $data['brand_name'] = $request->brand_product_name;
-        // $data['brand_slug'] = $request->brand_slug;
-        // $data['brand_desc'] = $request->brand_product_desc;
-        // $data['brand_status'] = $request->brand_product_status;
-        // DB::table('tbl_brand')->insert($data);
-
-        Session::put('message','Thêm thương hiệu thành công');
-        return Redirect::to('all-brand-product');
+        $get_image = request('brand_image');
+        if($get_image) {
+            $get_name_image = $get_image->getClientOriginalName();
+            $name_image = current(explode('.', $get_name_image));
+            $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
+            $get_image->move('public/uploads/brand', $new_image);
+            $brand = new Brand();
+            $brand->brand_name = $data['brand_product_name'];
+            $brand->brand_slug = $data['brand_slug'];
+            $brand->brand_desc = $data['brand_product_desc'];
+            $brand->brand_status = $data['brand_product_status'];
+            $brand->brand_image = $new_image;
+            $brand->save();
+            Session::put('message','Thêm Brarnd thành công');
+            return Redirect::to('all-brand-product');
+        }else {
+            Session::put('message', 'Làm ơn thêm hình ảnh');
+            return Redirect::to('add-brand-product');
+        }
     }
     public function unactive_brand_product($brand_product_id){
         $this->AuthLogin();
@@ -87,6 +89,7 @@ class BrandProduct extends Controller
         $brand->brand_slug = $data['brand_product_slug'];
         $brand->brand_desc = $data['brand_product_desc'];
         $brand->brand_status = $data['brand_product_status'];
+        $brand->brand_image = $data['brand_product_image'];
         $brand->save();
         // $data = array();
         // $data['brand_name'] = $request->brand_product_name;
@@ -111,9 +114,9 @@ class BrandProduct extends Controller
 
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
+        $brand_image = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
 
-
-        $brand_by_id = DB::table('tbl_product')->join('tbl_brand','tbl_product.brand_id','=','tbl_brand.brand_id')->where('tbl_brand.brand_slug',$brand_slug)->paginate(6);
+        $brand_by_id = DB::table('tbl_product')->join('tbl_brand','tbl_product.brand_id','=','tbl_brand.brand_id')->where('tbl_brand.brand_slug',$brand_slug)->paginate(8);
 
         $brand_name = DB::table('tbl_brand')->where('tbl_brand.brand_slug',$brand_slug)->limit(1)->get();
 
@@ -126,6 +129,6 @@ class BrandProduct extends Controller
             //--seo
         }
 
-        return view('pages.brand.show_brand')->with('category',$cate_product)->with('brand',$brand_product)->with('brand_by_id',$brand_by_id)->with('brand_name',$brand_name)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider);
+        return view('pages.brand.show_brand')->with('category',$cate_product)->with('brand_image',$brand_image)->with('brand',$brand_product)->with('brand_by_id',$brand_by_id)->with('brand_name',$brand_name)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider);
     }
 }

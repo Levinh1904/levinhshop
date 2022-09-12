@@ -62,6 +62,9 @@
                                         class="text-uppercase text-xxs font-weight-bolder opacity-7 ps-2">Slug
                                     </th>
                                     <th style="color: black"
+                                        class="text-uppercase text-xxs font-weight-bolder opacity-7 ps-2">Hình ảnh
+                                    </th>
+                                    <th style="color: black"
                                         class="text-center text-uppercase text-xxs font-weight-bolder opacity-7">Trạng
                                         thái
                                     </th>
@@ -75,10 +78,6 @@
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="../assets/img/team-2.jpg"
-                                                         class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                                                </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{ $brand_pro->brand_name }}</h6>
                                                 </div>
@@ -86,6 +85,9 @@
                                         </td>
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">{{ $brand_pro->brand_slug}}</p>
+                                        </td>
+                                        <td>
+                                            <img src="public/uploads/brand/{{ $brand_pro->brand_image }}" height="100" width="150">
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                         <span class="badge badge-sm bg-gradient-success"><span class="text-ellipsis">

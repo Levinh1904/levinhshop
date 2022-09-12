@@ -7,7 +7,7 @@
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 row">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                            <h6 class="text-white text-capitalize ps-3">Thêm Thương Hiệu</h6>
+                            <h6 class="text-white text-capitalize ps-3">Thêm Slide</h6>
                             <div class="col-6"><?php
                                                $message = Session::get('message');
                                                if($message){
@@ -47,11 +47,12 @@
                                                           padding-left: 10px;
                                                           margin-left: 10px;
                                                           font-family: cursive;
+                                                          height: 100px;
                                                           width: 97%;
                                                           margin-bottom: 10px" style="resize: none" rows="8" class="form-control" name="slider_desc" id="exampleInputPassword1" placeholder="Mô tả danh mục"></textarea>
                                 </div>
                                     <div class="form-group">
-                                        <div class="file-upload">
+                                        <div style="background: none;width: auto" class="file-upload">
                                             <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Hình Ảnh</button>
 
                                             <div class="image-upload-wrap">
@@ -61,7 +62,7 @@
                                                 </div>
                                             </div>
                                             <div class="file-upload-content">
-                                                <img class="file-upload-image" src="#" alt="your image" />
+                                                <img style="width: 350px;height: 400px" class="file-upload-image" src="#" alt="your image" />
                                                 <div class="image-title-wrap">
                                                     <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Hình ảnh đã tải lên</span></button>
                                                 </div>
@@ -86,7 +87,7 @@
                                     </select>
                                 </div>
 
-                                <button type="submit" name="add_slider" class="btn btn-info">Thêm slider</button>
+                                <button style="margin-left: 30px" type="submit" name="add_slider" class="btn btn-info">Thêm slider</button>
                                 </form>
                             </div>
 
