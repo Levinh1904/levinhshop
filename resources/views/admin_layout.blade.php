@@ -26,6 +26,10 @@
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <!-- Nucleo Icons -->
+    <link href="{{asset('public/backend/css/style-responsive.css')}}" rel="stylesheet"/>
+
+    <link href="{{asset('public/backend/css/jquery.dataTables.min.css')}}" rel="stylesheet"/>
+
     <link href="{{asset('public/backend/css/nucleo-icons.css')}}" rel="stylesheet" />
     <link href="{{asset('public/backend/css/nucleo-svg.css')}}" rel="stylesheet" />
     <link href="{{asset('public/backend/css/css.css')}}" rel="stylesheet" />
@@ -35,6 +39,9 @@
     <link href="{{asset('https://fonts.googleapis.com/icon?family=Material+Icons+Round')}}" rel="stylesheet">
     <!-- CSS Files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="{{asset('public/backend/js/jquery2.0.3.min.js')}}"></script>
+    <script src="{{asset('public/backend/js/raphael-min.js')}}"></script>
+    <script src="{{asset('public/backend/js/morris.js')}}"></script>
     <link id="pagestyle" href="{{asset('public/backend/css/material-dashboard.css?v=3.0.4')}}" rel="stylesheet" />
     <style>
         svg.bi.bi-box-arrow-right {
@@ -80,7 +87,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/virtual-reality.html">
+                <a class="nav-link text-white " href="{{URL::to('/all-product')}}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">view_in_ar</i>
                     </div>
@@ -101,6 +108,14 @@
                         <i class="material-icons opacity-10">notifications</i>
                     </div>
                     <span class="nav-link-text ms-1">Slide</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white " href="{{URL::to('/manage-blog')}}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">notifications</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Blog</span>
                 </a>
             </li>
             <li class="nav-item mt-3">
@@ -132,18 +147,24 @@
     </div>
 </aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <!-- Navbar
+    <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
         <div class="container-fluid py-1 px-3">
 
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                <div class="ms-md-auto pe-md-5 d-flex align-items-center">
+                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="input-group input-group-outline">
-                        <label class="form-label">Từ Khóa...</label>
+                        <label class="form-label">Type here...</label>
                         <input type="text" class="form-control">
                     </div>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
+                    <li class="nav-item d-flex align-items-center">
+                        <a href="../pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+                            <i class="fa fa-user me-sm-1"></i>
+                            <span class="d-sm-inline d-none">Sign In</span>
+                        </a>
+                    </li>
                     <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                         <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                             <div class="sidenav-toggler-inner">
@@ -158,12 +179,85 @@
                             <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
                         </a>
                     </li>
-
+                    <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                        <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-bell cursor-pointer"></i>
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                            <li class="mb-2">
+                                <a class="dropdown-item border-radius-md" href="javascript:;">
+                                    <div class="d-flex py-1">
+                                        <div class="my-auto">
+                                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                                <span class="font-weight-bold">New message</span> from Laur
+                                            </h6>
+                                            <p class="text-xs text-secondary mb-0">
+                                                <i class="fa fa-clock me-1"></i>
+                                                13 minutes ago
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="mb-2">
+                                <a class="dropdown-item border-radius-md" href="javascript:;">
+                                    <div class="d-flex py-1">
+                                        <div class="my-auto">
+                                            <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                                <span class="font-weight-bold">New album</span> by Travis Scott
+                                            </h6>
+                                            <p class="text-xs text-secondary mb-0">
+                                                <i class="fa fa-clock me-1"></i>
+                                                1 day
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item border-radius-md" href="javascript:;">
+                                    <div class="d-flex py-1">
+                                        <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                                            <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <title>credit-card</title>
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                                        <g transform="translate(1716.000000, 291.000000)">
+                                                            <g transform="translate(453.000000, 454.000000)">
+                                                                <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
+                                                                <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                                Payment successfully completed
+                                            </h6>
+                                            <p class="text-xs text-secondary mb-0">
+                                                <i class="fa fa-clock me-1"></i>
+                                                2 days
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
-    </nav>-->
+    </nav>
     <!-- End Navbar -->
+
     <div class="container-fluid py-4">
         @yield('admin_content')
     </div>
@@ -261,6 +355,229 @@
 <script src="{{asset('public/backend/js/plugins/perfect-scrollbar.min.js')}}"></script>
 <script src="{{asset('public/backend/js/plugins/smooth-scrollbar.min.js')}}"></script>
 <script src="{{asset('public/backend/js/plugins/chartjs.min.js')}}"></script>
+<script src="{{asset('public/backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
+<script src="{{asset('public/backend/js/scripts.js')}}"></script>
+<script src="{{asset('public/backend/js/jquery.slimscroll.js')}}"></script>
+<script src="{{asset('public/backend/js/jquery.nicescroll.js')}}"></script>
+<script src="{{asset('public/backend/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('public/backend/js/jquery.form-validator.min.js')}}"></script>
+<script src="{{asset('public/backend/js/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript">
+
+    function ChangeToSlug()
+    {
+        var slug;
+
+        //Lấy text từ thẻ input title
+        slug = document.getElementById("slug").value;
+        slug = slug.toLowerCase();
+        //Đổi ký tự có dấu thành không dấu
+        slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+        slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+        slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+        slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+        slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+        slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+        slug = slug.replace(/đ/gi, 'd');
+        //Xóa các ký tự đặt biệt
+        slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+        //Đổi khoảng trắng thành ký tự gạch ngang
+        slug = slug.replace(/ /gi, "-");
+        //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+        //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+        slug = slug.replace(/\-\-\-\-\-/gi, '-');
+        slug = slug.replace(/\-\-\-\-/gi, '-');
+        slug = slug.replace(/\-\-\-/gi, '-');
+        slug = slug.replace(/\-\-/gi, '-');
+        //Xóa các ký tự gạch ngang ở đầu và cuối
+        slug = '@' + slug + '@';
+        slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+        //In slug ra textbox có id “slug”
+        document.getElementById('convert_slug').value = slug;
+    }
+
+
+
+
+</script>t
+<script ype="text/javascript">
+    $('.update_quantity_order').click(function(){
+        var order_product_id = $(this).data('product_id');
+        var order_qty = $('.order_qty_'+order_product_id).val();
+        var order_code = $('.order_code').val();
+        var _token = $('input[name="_token"]').val();
+        // alert(order_product_id);
+        // alert(order_qty);
+        // alert(order_code);
+        $.ajax({
+            url : '{{url('/update-qty')}}',
+
+            method: 'POST',
+
+            data:{_token:_token, order_product_id:order_product_id ,order_qty:order_qty ,order_code:order_code},
+            // dataType:"JSON",
+            success:function(data){
+
+                alert('Cập nhật số lượng thành công');
+
+                location.reload();
+
+
+
+
+            }
+        });
+
+    });
+</script>
+<script type="text/javascript">
+    $('.order_details').change(function(){
+        var order_status = $(this).val();
+        var order_id = $(this).children(":selected").attr("id");
+        var _token = $('input[name="_token"]').val();
+
+        //lay ra so luong
+        quantity = [];
+        $("input[name='product_sales_quantity']").each(function(){
+            quantity.push($(this).val());
+        });
+        //lay ra product id
+        order_product_id = [];
+        $("input[name='order_product_id']").each(function(){
+            order_product_id.push($(this).val());
+        });
+        j = 0;
+        for(i=0;i<order_product_id.length;i++){
+            //so luong khach dat
+            var order_qty = $('.order_qty_' + order_product_id[i]).val();
+            //so luong ton kho
+            var order_qty_storage = $('.order_qty_storage_' + order_product_id[i]).val();
+
+            if(parseInt(order_qty)>parseInt(order_qty_storage)){
+                j = j + 1;
+                if(j==1){
+                    alert('Số lượng bán trong kho không đủ');
+                }
+                $('.color_qty_'+order_product_id[i]).css('background','#000');
+            }
+        }
+        if(j==0){
+
+            $.ajax({
+                url : '{{url('/update-order-qty')}}',
+                method: 'POST',
+                data:{_token:_token, order_status:order_status ,order_id:order_id ,quantity:quantity, order_product_id:order_product_id},
+                success:function(data){
+                    alert('Thay đổi tình trạng đơn hàng thành công');
+                    location.reload();
+                }
+            });
+
+        }
+
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        fetch_delivery();
+
+        function fetch_delivery(){
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url : '{{url('/select-feeship')}}',
+                method: 'POST',
+                data:{_token:_token},
+                success:function(data){
+                    $('#load_delivery').html(data);
+                }
+            });
+        }
+        $(document).on('blur','.fee_feeship_edit',function(){
+
+            var feeship_id = $(this).data('feeship_id');
+            var fee_value = $(this).text();
+            var _token = $('input[name="_token"]').val();
+            // alert(feeship_id);
+            // alert(fee_value);
+            $.ajax({
+                url : '{{url('/update-delivery')}}',
+                method: 'POST',
+                data:{feeship_id:feeship_id, fee_value:fee_value, _token:_token},
+                success:function(data){
+                    fetch_delivery();
+                }
+            });
+
+        });
+        $('.add_delivery').click(function(){
+
+            var city = $('.city').val();
+            var province = $('.province').val();
+            var wards = $('.wards').val();
+            var fee_ship = $('.fee_ship').val();
+            var _token = $('input[name="_token"]').val();
+            // alert(city);
+            // alert(province);
+            // alert(wards);
+            // alert(fee_ship);
+            $.ajax({
+                url : '{{url('/insert-delivery')}}',
+                method: 'POST',
+                data:{city:city, province:province, _token:_token, wards:wards, fee_ship:fee_ship},
+                success:function(data){
+                    fetch_delivery();
+                }
+            });
+
+
+        });
+        $('.choose').on('change',function(){
+            var action = $(this).attr('id');
+            var ma_id = $(this).val();
+            var _token = $('input[name="_token"]').val();
+            var result = '';
+            // alert(action);
+            //  alert(matp);
+            //   alert(_token);
+
+            if(action=='city'){
+                result = 'province';
+            }else{
+                result = 'wards';
+            }
+            $.ajax({
+                url : '{{url('/select-delivery')}}',
+                method: 'POST',
+                data:{action:action,ma_id:ma_id,_token:_token},
+                success:function(data){
+                    $('#'+result).html(data);
+                }
+            });
+        });
+    })
+
+
+</script>
+<script type="text/javascript">
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+</script>
+<script type="text/javascript">
+    $.validate({
+
+    });
+</script>
+<script>
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace('ckeditor');
+    CKEDITOR.replace('ckeditor1');
+    CKEDITOR.replace('ckeditor2');
+    CKEDITOR.replace('ckeditor3');
+    CKEDITOR.replace('id4');
+</script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

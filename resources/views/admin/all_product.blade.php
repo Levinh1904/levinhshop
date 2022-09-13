@@ -1,111 +1,137 @@
 @extends('admin_layout')
 @section('admin_content')
-    <div class="table-agile-info">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      Liệt kê sản phẩm
-    </div>
-    <div class="row w3-res-tb">
-      <div class="col-sm-5 m-b-xs">
-        <select class="input-sm form-control w-sm inline v-middle">
-          <option value="0">Bulk action</option>
-          <option value="1">Delete selected</option>
-          <option value="2">Bulk edit</option>
-          <option value="3">Export</option>
-        </select>
-        <button class="btn btn-sm btn-default">Apply</button>                
-      </div>
-      <div class="col-sm-4">
-      </div>
-      <div class="col-sm-3">
-        <div class="input-group">
-          <input type="text" class="input-sm form-control" placeholder="Search">
-          <span class="input-group-btn">
-            <button class="btn btn-sm btn-default" type="button">Go!</button>
-          </span>
+    <style>
+        span.text-alert.text-red\; {
+            color: black;
+            font-family: "Times New Roman";
+            font-weight: initial;
+        }
+        td {
+            color: black;
+            font-family: monospace;
+            text-align: center;
+            border-bottom: 2px solid;
+        }
+    </style>
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+         data-scroll="true">
+        <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+
+                <div class="col-12">
+                    <a class="nav-link text-white " href="{{URL::to('/add-product')}}">
+                    <span style="background:black;
+                                font-size: 20px;
+                                font-family: auto;
+                                font-weight: bold;
+                                padding: 10px;
+                                border-radius: 5px;
+                                color: #f0f2f5;" class="nav-link-text ms-1">Thêm Mới</span>
+                    </a>
+                </div>
+
+            </nav>
+
         </div>
-      </div>
-    </div>
-    <div class="table-responsive">
-                      <?php
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card my-4">
+                    <div style="margin-bottom:20px " class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div style="height: 70px" class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+
+                            <h6 style="float: left; margin-right: 20px" class="text-white text-capitalize ps-3">Sản Phẩm</h6>
+                            <?php
+
                             $message = Session::get('message');
-                            if($message){
-                                echo '<span class="text-alert">'.$message.'</span>';
-                                Session::put('message',null);
+                            if ($message) {
+                                echo '<span class="text-alert text-red;">' . $message . '</span>';
+                                Session::put('message', null);
                             }
                             ?>
-      <table class="table table-striped b-t b-light">
-        <thead>
-          <tr>
-            <th style="width:20px;">
-              <label class="i-checks m-b-none">
-                <input type="checkbox"><i></i>
-              </label>
-            </th>
-            <th>Tên sản phẩm</th>
-            <th>Số lượng</th>
-            <th>Slug</th>
-            <th>Giá</th>
-            <th>Hình sản phẩm</th>
-            <th>Danh mục</th>
-            <th>Thương hiệu</th>
-            
-            <th>Hiển thị</th>
-            
-            <th style="width:30px;"></th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($all_product as $key => $pro)
-          <tr>
-            <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-            <td>{{ $pro->product_name }}</td>
-            <td>{{ $pro->product_quantity }}</td>
-            <td>{{ $pro->product_slug }}</td>
-            <td>{{ number_format($pro->product_price,0,',','.') }}đ</td>
-            <td><img src="public/uploads/product/{{ $pro->product_image }}" height="100" width="100"></td>
-            <td>{{ $pro->category_name }}</td>
-            <td>{{ $pro->brand_name }}</td>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="">
+                            <table class="">
+                                <thead>
+                                <tr style="padding: 10px;
+                                            background: #e4f7e4;
+                                            color: black;
+                                            height: 40px;
+                                            font-family: 'Font Awesome 5 Brands';
+                                            border: 2px solid navy;
+                                            text-align: center;">
+                                    <th>Tên sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Slug</th>
+                                    <th>Giá</th>
+                                    <th>Hình sản phẩm</th>
+                                    <th>Danh mục</th>
+                                    <th style="">Thương hiệu</th>
 
-            <td><span class="text-ellipsis">
-              <?php
-               if($pro->product_status==0){
-                ?>
-                <a href="{{URL::to('/unactive-product/'.$pro->product_id)}}"><span class="fa-thumb-styling fa fa-thumbs-up"></span></a>
-                <?php
-                 }else{
-                ?>  
-                 <a href="{{URL::to('/active-product/'.$pro->product_id)}}"><span class="fa-thumb-styling fa fa-thumbs-down"></span></a>
-                <?php
-               }
-              ?>
-            </span></td>
-           
-            <td>
-              <a href="{{URL::to('/edit-product/'.$pro->product_id)}}" class="active styling-edit" ui-toggle-class="">
-                <i class="fa fa-pencil-square-o text-success text-active"></i></a>
-              <a onclick="return confirm('Bạn có chắc là muốn xóa sản phẩm này ko?')" href="{{URL::to('/delete-product/'.$pro->product_id)}}" class="active styling-edit" ui-toggle-class="">
-                <i class="fa fa-times text-danger text"></i>
-              </a>
-            </td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
+                                    <th>Hiển thị</th>
+                                    <th></th>
+
+                                    <th style="width:30px;"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($all_product as $key => $pro)
+                                    <tr>
+                                        <td style="">{{ $pro->product_name }}</td>
+                                        <td>{{ $pro->product_quantity }}</td>
+                                        <td>{{ $pro->product_slug }}</td>
+                                        <td>{{ number_format($pro->product_price,0,',','.') }}đ</td>
+                                        <td><img src="public/uploads/product/{{ $pro->product_image }}" height="100" width="100"></td>
+                                        <td>{{ $pro->category_name }}</td>
+                                        <td>{{ $pro->brand_name }}</td>
+
+                                        <td><span class="text-ellipsis">
+                                          <?php
+                                                if($pro->product_status==0){
+                                                    ?>
+                                            <a href="{{URL::to('/unactive-product/'.$pro->product_id)}}"><span class="fa-thumb-styling fa fa-thumbs-up"></span></a>
+                                            <?php
+                                                }else{
+                                                    ?>
+                                             <a href="{{URL::to('/active-product/'.$pro->product_id)}}"><span class="fa-thumb-styling fa fa-thumbs-down"></span></a>
+                                            <?php
+                                                }
+                                                    ?>
+                                        </span></td>
+
+                                        <td>
+                                            <a href="{{URL::to('/edit-product/'.$pro->product_id)}}" class="active styling-edit" ui-toggle-class="">
+                                                <i class="fa fa-pencil-square-o text-success text-active"></i></a>
+                                            <a onclick="return confirm('Bạn có chắc là muốn xóa sản phẩm này ko?')" href="{{URL::to('/delete-product/'.$pro->product_id)}}" class="active styling-edit" ui-toggle-class="">
+                                                <i class="fa fa-times text-danger text"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <footer style="margin-top: 20px" class="panel-footer">
+                            <div class="row">
+
+                                <div class="col-sm-5 text-center">
+                                    <small class="text-muted inline m-t-sm m-b-sm"></small>
+                                </div>
+                                <div class="col-sm-7 text-right text-center-xs">
+                                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                                        {!!$all_product->links()!!}
+                                    </ul>
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <footer class="panel-footer">
-      <div class="row">
-        
-        <div class="col-sm-5 text-center">
-          <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
-        </div>
-        <div class="col-sm-7 text-right text-center-xs">                
-          <ul class="pagination pagination-sm m-t-none m-b-none">
-            {!!$all_product->links()!!}
-          </ul>
-        </div>
-      </div>
-    </footer>
-  </div>
-</div>
 @endsection

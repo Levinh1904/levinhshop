@@ -21,7 +21,7 @@
                         <section class="panel">
                             <div class="panel-body">
                                 <div class="position-center">
-                                    <form role="form" action="{{URL::to('/save-brand-product')}}" method="post">
+                                    <form role="form" action="{{URL::to('/save-brand-product')}}" method="post" enctype="multipart/form-data">
                                         {{ csrf_field() }}
                                         <div class="form-group">
                                             <label style="font-size: 16px;
@@ -61,6 +61,22 @@
                                                           font-family: cursive;
                                                           width: 97%;
                                                           margin-bottom: 10px" style="resize: none" rows="8" class="form-control" name="brand_product_desc" id="exampleInputPassword1" placeholder="Mô tả danh mục"></textarea>
+                                        </div>
+                                        <div style="background: none;width: auto" class="file-upload">
+                                            <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Hình Ảnh</button>
+
+                                            <div class="image-upload-wrap">
+                                                <input name="brand_image" class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                                                <div class="drag-text">
+                                                    <h3>Kéo và thả tệp hoặc chọn thêm hình ảnh</h3>
+                                                </div>
+                                            </div>
+                                            <div class="file-upload-content">
+                                                <img style="width: 350px;height: 400px" class="file-upload-image" src="#" alt="your image" />
+                                                <div class="image-title-wrap">
+                                                    <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Hình ảnh đã tải lên</span></button>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label style="font-size: 16px;

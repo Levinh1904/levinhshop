@@ -13,6 +13,10 @@
 //Frontend
 Route::get('/','HomeController@index' );
 Route::get('/trang-chu','HomeController@index');
+Route::get('/404','HomeController@error_page');
+Route::post('/tim-kiem','HomeController@search');
+//Blog
+Route::get('/show-blog','BlogController@show_blog');
 
 //Admin
 Route::get('/admin','AdminController@index');
@@ -64,3 +68,40 @@ Route::get('/delete-slide/{slide_id}','SliderController@delete_slide');
 Route::post('/insert-slider','SliderController@insert_slider');
 Route::get('/unactive-slide/{slide_id}','SliderController@unactive_slide');
 Route::get('/active-slide/{slide_id}','SliderController@active_slide');
+//Blog-Admin
+Route::get('/manage-blog','BlogController@manage_blog');
+Route::get('/add-blog','BlogController@add_blog');
+Route::get('/delete-blog/{blog_id}','BlogController@delete_blog');
+Route::post('/save-blog','BlogController@save_blog');
+Route::get('/unactive-blog/{blog_id}','BlogController@unactive_blog');
+Route::get('/active-blog/{blog_id}','BlogController@active_blog');
+//Product
+// Route::group(['middleware' => 'roles', 'roles'=>['admin','author']], function () {
+Route::get('/add-product','ProductController@add_product');
+Route::get('/edit-product/{product_id}','ProductController@edit_product');
+// });
+Route::get('users',
+    [
+        'uses'=>'UserController@index',
+        'as'=> 'Users',
+        'middleware'=> 'roles'
+        // 'roles' => ['admin','author']
+    ]);
+Route::get('add-users','UserController@add_users');
+Route::post('store-users','UserController@store_users');
+Route::post('assign-roles','UserController@assign_roles');
+
+
+
+Route::get('/delete-product/{product_id}','ProductController@delete_product');
+Route::get('/all-product','ProductController@all_product');
+Route::get('/unactive-product/{product_id}','ProductController@unactive_product');
+Route::get('/active-product/{product_id}','ProductController@active_product');
+Route::post('/save-product','ProductController@save_product');
+Route::post('/update-product/{product_id}','ProductController@update_product');
+
+//Danh muc san pham trang chu
+Route::get('/danh-muc/{slug_category_product}','CategoryProduct@show_category_home');
+Route::get('/thuong-hieu/{brand_slug}','BrandProduct@show_brand_home');
+Route::get('/chi-tiet/{product_slug}','ProductController@details_product');
+
