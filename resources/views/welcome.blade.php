@@ -5,29 +5,29 @@
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Harmic - Home Two</title>
+    <title>Lê Vĩnh Wath</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="public/frontend/images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('public/frontend/images/favicon.ico')}}" />
 
     <!-- CSS
     ============================================ -->
 
     <!-- Vendor CSS (Contain Bootstrap, Icon Fonts) -->
-    <link rel="stylesheet" href="public/frontend/css/vendor/font-awesome.min.css" />
-    <link rel="stylesheet" href="public/frontend/css/vendor/Pe-icon-7-stroke.css" />
+    <link rel="stylesheet" href="{{asset('public/frontend/css/vendor/font-awesome.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('public/frontend/css/vendor/Pe-icon-7-stroke.css')}}" />
 
     <!-- Plugin CSS (Global Plugins Files) -->
-    <link rel="stylesheet" href="public/frontend/css/plugins/animate.min.css">
-    <link rel="stylesheet" href="public/frontend/css/plugins/jquery-ui.min.css">
-    <link rel="stylesheet" href="public/frontend/css/plugins/swiper-bundle.min.css">
-    <link rel="stylesheet" href="public/frontend/css/plugins/nice-select.css">
-    <link rel="stylesheet" href="public/frontend/css/plugins/magnific-popup.min.css" />
+    <link rel="stylesheet" href="{{asset('public/frontend/css/plugins/animate.min.css')}}">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/plugins/jquery-ui.min.css')}}">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/plugins/swiper-bundle.min.css')}}">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/plugins/nice-select.css')}}">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/plugins/magnific-popup.min.')}}" />
 
     <!-- Style CSS -->
-    <link rel="stylesheet" href="public/frontend/css/style.css">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/style.css')}}">
 
 </head>
 
@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-6 ">
                         <div class="header-top-right text-matterhorn col-6 ">
-                            <p class="shipping mb-0">Free delivery on order over <span>$200</span></p>
+                            <p class="shipping mb-0">Giao hàng miễn phí khi đặt hàng trên <span>200.000 VNĐ</span></p>
                         </div>
                     </div>
                 </div>
@@ -64,12 +64,13 @@
                     <div class="col-lg-12">
                         <div class="header-middle-wrap">
                             <a href="{{URL::to('/trang-chu')}}" class="header-logo">
-                                <img src="public/frontend/images/logo/dark.png" alt="Header Logo">
+                                <img style="width: 170px;" src="{{asset('public/frontend/images/logo/logo.png')}}" alt="Header Logo">
                             </a>
                             <div class="header-search-area d-none d-lg-block">
-                                <form action="#" class="header-searchbox">
-                                    <input class="input-field" type="text" placeholder="Search Products">
-                                    <button class="btn btn-outline-whisper btn-primary-hover" type="submit"><i class="pe-7s-search"></i></button>
+                                <form action="{{URL::to('/tim-kiem')}}" method="POST" class="header-searchbox">
+                                    {{csrf_field()}}
+                                    <input name="keywords_submit" class="input-field" type="text" placeholder="Tìm kiếm sản phẩm">
+                                    <button name="search_items" class="btn btn-outline-whisper btn-primary-hover" type="submit"><i class="pe-7s-search"></i></button>
                                 </form>
                             </div>
                             <div class="header-right">
@@ -93,8 +94,8 @@
                                             <i class="pe-7s-search"></i>
                                         </a>
                                     </li>
-                                    <li class="minicart-wrap me-3 me-lg-0">
-                                        <a href="#miniCart" class="minicart-btn toolbar-btn">
+                                    <li class="">
+                                        <a href="{{URL::to('/gio-hang')}}" class="minicart-btn toolbar-btn">
                                             <i class="pe-7s-shopbag"></i>
                                             <span class="quantity">3</span>
                                         </a>
@@ -120,161 +121,32 @@
                                 <nav class="main-nav">
                                     <ul>
                                         <li class="drop-holder">
-                                            <a href="{{URL::to('/trang-chu')}}">Home
-                                                <i class="fa fa-chevron-down"></i>
+                                            <a href="{{URL::to('/trang-chu')}}">Trang Chủ
                                             </a>
                                         </li>
+                                        @foreach($category as $key => $cate)
                                         <li>
-                                            <a href="about.html">About</a>
+                                            <a href="{{URL::to('/danh-muc/'.$cate->slug_category_product)}}">{{$cate->category_name}}</a>
                                         </li>
-                                        <li class="megamenu-holder">
-                                            <a href="javascript:void(0)">Shop
-                                                <i class="fa fa-chevron-down"></i>
-                                            </a>
-                                            <ul class="drop-menu megamenu">
-                                                <li>
-                                                    <span class="title">Shop Layout</span>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop.html">Shop Default</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-left-sidebar.html">Shop Left Sidebar</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-right-sidebar.html">Shop Right Sidebar</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-fullwidth.html">Shop List Fullwidth</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-left-sidebar.html">Shop List Left Sidebar</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-right-sidebar.html">Shop List Right Sidebar</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Product Style</span>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="single-product.html">Single Product Default</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="single-product-group.html">Single Product Group</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="single-product-variable.html">Single Product Variable</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="single-product-sale.html">Single Product Sale</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="single-product-sticky.html">Single Product Sticky</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="single-product-affiliate.html">Single Product Affiliate</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Product Related</span>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="my-account.html">My Account</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="login-register.html">Login | Register</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html">Shopping Cart</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="wishlist.html">Wishlist</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="compare.html">Compare</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="checkout.html">Checkout</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li class="menu-slider-wrap">
-                                                    <div class="swiper-container menu-slider">
-                                                        <div class="swiper-wrapper">
-                                                            <div class="swiper-slide img-zoom-effect with-overlay">
-                                                                <a href="#" class="single-item">
-                                                                    <img class="img-full" src="public/frontend/images/megamenu/slider/1.jpg" alt="Megamenu Slider">
-                                                                </a>
-                                                            </div>
-                                                            <div class="swiper-slide img-zoom-effect with-overlay">
-                                                                <a href="#" class="single-item">
-                                                                    <img class="img-full" src="public/frontend/images/megamenu/slider/2.jpg" alt="Megamenu Slider">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
+                                        @endforeach
                                         <li class="drop-holder">
-                                            <a href="javascript:void(0)">Pages
+                                            <a href="javascript:void(0)">Thương Hiệu
                                                 <i class="fa fa-chevron-down"></i>
                                             </a>
                                             <ul class="drop-menu">
+                                                @foreach($brand as $key => $brand)
                                                 <li>
-                                                    <a href="faq.html">Frequently Questions</a>
+                                                    <a href="{{URL::to('/thuong-hieu/'.$brand->brand_slug)}}">{{$brand->brand_name}}</a>
                                                 </li>
-                                                <li>
-                                                    <a href="404.html">Error 404</a>
-                                                </li>
+                                                @endforeach
                                             </ul>
                                         </li>
                                         <li class="drop-holder">
-                                            <a href="javascript:void(0)">Blog
-                                                <i class="fa fa-chevron-down"></i>
+                                            <a href="{{URL::to('/show-blog')}}">Bài Viết
                                             </a>
-                                            <ul class="drop-menu">
-                                                <li class="sub-dropdown-holder">
-                                                    <a href="javascript:void(0)">Blog Holder</a>
-                                                    <ul class="drop-menu sub-dropdown">
-                                                        <li>
-                                                            <a href="blog.html">Blog Default</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="blog-left-sidebar.html">Blog Left Sidebar</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="blog-right-sidebar.html">Blog Right Sidebar</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="blog-list-left-sidebar.html">Blog List Left Sidebar</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="blog-list-right-sidebar.html">Blog List Right Sidebar</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li class="sub-dropdown-holder">
-                                                    <a href="javascript:void(0)">Blog Detail Holder</a>
-                                                    <ul class="drop-menu sub-dropdown">
-                                                        <li>
-                                                            <a href="blog-detail.html">Blog Detail Default</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="blog-detail-left-sidebar.html">Blog Detail Left Sidebar</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="blog-detail-right-sidebar.html">Blog Detail Right Sidebar</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
                                         </li>
                                         <li>
-                                            <a href="contact.html">Contact</a>
+                                            <a href="{{URL::to('/contact')}}">Liên Hệ</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -292,35 +164,16 @@
                     </div>
                     <div class="offcanvas-user-info text-center px-6 pb-5">
                         <div class=" text-silver">
-                            <p class="shipping mb-0">Free delivery on order over <span class="text-primary">$200</span></p>
+                            <p class="shipping mb-0">Giao hàng miễn phí khi đặt hàng trên <span class="text-primary">200.00 VND</span></p>
                         </div>
                         <ul class="dropdown-wrap justify-content-center text-silver">
-                            <li class="dropdown dropup">
-                                <button class="btn btn-link dropdown-toggle ht-btn" type="button" id="languageButtonTwo" data-bs-toggle="dropdown" aria-expanded="false">
-                                    English
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="languageButtonTwo">
-                                    <li><a class="dropdown-item" href="#">French</a></li>
-                                    <li><a class="dropdown-item" href="#">Italian</a></li>
-                                    <li><a class="dropdown-item" href="#">Spanish</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown dropup">
-                                <button class="btn btn-link dropdown-toggle ht-btn usd-dropdown" type="button" id="currencyButtonTwo" data-bs-toggle="dropdown" aria-expanded="false">
-                                    USD
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="currencyButtonTwo">
-                                    <li><a class="dropdown-item" href="#">GBP</a></li>
-                                    <li><a class="dropdown-item" href="#">ISO</a></li>
-                                </ul>
-                            </li>
                             <li class="dropdown dropup">
                                 <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button" id="settingButtonTwo" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="pe-7s-users"></i>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButtonTwo">
-                                    <li><a class="dropdown-item" href="my-account.html">My account</a></li>
-                                    <li><a class="dropdown-item" href="login-register.html">Login | Register</a></li>
+                                    <li><a class="dropdown-item" href="my-account.html">Đăng Nhập</a></li>
+                                    <li><a class="dropdown-item" href="login-register.html">Đăng Ký</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -335,243 +188,42 @@
                             <ul class="mobile-menu">
                                 <li class="menu-item-has-children">
                                     <a href="#">
-                                            <span class="mm-text">Home
-                                            <i class="pe-7s-angle-down"></i>
+                                            <span class="mm-text">Trang Chủ
                                         </span>
                                     </a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="index.html">
-                                                <span class="mm-text">Home One</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="index-2.html">
-                                                <span class="mm-text">Home Two</span>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
-                                <li>
-                                    <a href="about.html">
-                                        <span class="mm-text">About Us</span>
-                                    </a>
-                                </li>
+                                @foreach($category as $key => $cate)
+                                    <li>
+                                        <a href="{{URL::to('/danh-muc/'.$cate->slug_category_product)}}">
+                                            <span class="mm-text">{{$cate->category_name}}</span>
+                                        </a>
+                                    </li>
+                                @endforeach
                                 <li class="menu-item-has-children">
                                     <a href="#">
-                                            <span class="mm-text">Shop
+                                            <span class="mm-text">Thương Hiệu
                                             <i class="pe-7s-angle-down"></i>
                                         </span>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li class="menu-item-has-children">
-                                            <a href="#">
-                                                    <span class="mm-text">Shop Layout
-                                                    <i class="pe-7s-angle-down"></i>
-                                                </span>
-                                            </a>
-                                            <ul class="sub-menu">
-                                                <li>
-                                                    <a href="shop.html">
-                                                        <span class="mm-text">Shop Default</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-leftsidebar.html">
-                                                        <span class="mm-text">Shop Left Sidebar</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-rightsidebar.html">
-                                                        <span class="mm-text">Shop Right Sidebar</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-list-fullwidth.html">
-                                                        <span class="mm-text">Shop List Fullwidth</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-list-left-sidebar.html">
-                                                        <span class="mm-text">Shop List Left Sidebar</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-list-right-sidebar.html">
-                                                        <span class="mm-text">Shop List Right Sidebar</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <a href="#">
-                                                    <span class="mm-text">Product Style
-                                                    <i class="pe-7s-angle-down"></i>
-                                                </span>
-                                            </a>
-                                            <ul class="sub-menu">
-                                                <li>
-                                                    <a href="single-product.html">
-                                                        <span class="mm-text">Single Product Default</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="single-product-group.html">
-                                                        <span class="mm-text">Single Product Group</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="single-product-variable.html">
-                                                        <span class="mm-text">Single Product Variable</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="single-product-sale.html">
-                                                        <span class="mm-text">Single Product Sale</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="single-product-sticky.html">
-                                                        <span class="mm-text">Single Product Sticky</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="single-product-affiliate.html">
-                                                        <span class="mm-text">Single Product Affiliate</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <a href="#">
-                                                    <span class="mm-text">Product Related
-                                                    <i class="pe-7s-angle-down"></i>
-                                                </span>
-                                            </a>
-                                            <ul class="sub-menu">
-                                                <li>
-                                                    <a href="my-account.html">
-                                                        <span class="mm-text">My Account</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="login-register.html">
-                                                        <span class="mm-text">Login | Register</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="cart.html">
-                                                        <span class="mm-text">Shopping Cart</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="wishlist.html">
-                                                        <span class="mm-text">Wishlist</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="compare.html">
-                                                        <span class="mm-text">Compare</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="checkout.html">
-                                                        <span class="mm-text">Checkout</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">
-                                            <span class="mm-text">Pages
-                                            <i class="pe-7s-angle-down"></i>
-                                        </span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="faq.html">
-                                                <span class="mm-text">Frequently Questions</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="404.html">
-                                                <span class="mm-text">Error 404</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">
-                                            <span class="mm-text">Blog
-                                            <i class="pe-7s-angle-down"></i>
-                                        </span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li class="menu-item-has-children">
-                                            <a href="#">
-                                                    <span class="mm-text">Blog Holder
-                                                    <i class="pe-7s-angle-down"></i>
-                                                </span>
-                                            </a>
-                                            <ul class="sub-menu">
-                                                <li>
-                                                    <a href="blog.html">
-                                                        <span class="mm-text">Blog Default</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-left-sidebar.html">
-                                                        <span class="mm-text">Blog Left Sidebar</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-right-sidebar.html">
-                                                        <span class="mm-text">Blog Right Sidebar</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-list-left-sidebar.html">
-                                                        <span class="mm-text">Blog List Left Sidebar</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-list-right-sidebar.html">
-                                                        <span class="mm-text">Blog List Right Sidebar</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <a href="#">
-                                                    <span class="mm-text">Blog Detail Holder
-                                                    <i class="pe-7s-angle-down"></i>
-                                                </span>
-                                            </a>
-                                            <ul class="sub-menu">
-                                                <li>
-                                                    <a href="blog-detail.html">
-                                                        <span class="mm-text">Blog Detail Default</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-detail-left-sidebar.html">
-                                                        <span class="mm-text">Blog Detail Left Sidebar</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-detail-right-sidebar.html">
-                                                        <span class="mm-text">Blog Detail Right Sidebar</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
+                                        @foreach($brand as $key => $brand)
+                                            <li>
+                                                <a href="">
+                                                    <span class="mm-text"></span>
+                                                </a>
+                                            </li>
+                                        @endforeach
+
                                     </ul>
                                 </li>
                                 <li>
                                     <a href="contact.html">
-                                        <span class="mm-text">Contact</span>
+                                        <span class="mm-text">Bài Viêt</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="contact.html">
+                                        <span class="mm-text">Liên Hệ</span>
                                     </a>
                                 </li>
                             </ul>
@@ -653,9 +305,68 @@
         <div class="global-overlay"></div>
     </header>
     <!-- Main Header Area End Here -->
+    <!-- Begin Slider Area -->
+    <div class="slider-area">
+
+        <!-- Main Slider -->
+        <div class="swiper-container main-slider-2 swiper-arrow with-bg_white">
+            <div class="swiper-wrapper">
+                @php
+                    $i = 0;
+                @endphp
+                @foreach($slider as $key => $slide)
+                    @php
+                        $i++;
+                    @endphp
+                   <div class="swiper-slide animation-style-01">
+                    <div class="slide-inner bg-height" data-bg-image="{{asset('public/uploads/slider/'.$slide->slider_image)}}" alt="{{$slide->slider_desc}}">
+                        <div class="container">
+                            <div class="slide-content">
+                                <h2 class="title font-weight-bold mb-4" style="color: antiquewhite">{{$slide->slider_name}}</h2>
+                                <p class="short-desc different-width mb-9" style="color: darkgoldenrod;font-family: 'Times New Roman'">{{$slide->slider_desc}}</p>
+                                <div class="button-wrap">
+                                    <a class="btn btn-custom-size lg-size btn-primary btn-white-hover rounded-0" href="shop.html">Mua Ngay</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination with-bg d-md-none"></div>
+
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+
+    </div>
+    <!-- Slider Area End Here -->
 
     @yield('content')
+    <!-- Begin Brand Area -->
+    <div class="brand-area section-space-y-axis-100" style="padding-top: initial; margin-top: 20px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="swiper-container brand-slider">
+                        <div class="swiper-wrapper">
+                            @foreach($brand_image as $key => $brand)
+                            <div class="swiper-slide">
+                                <a class="brand-item" href="{{URL::to('/thuong-hieu/'.$brand->brand_slug)}}">
+                                    <img src="{{URL::to('/public/uploads/brand/'.$brand->brand_image)}}" alt="Brand Image">
 
+                                </a>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Brand Area End Here -->
     <!-- Begin Footer Area -->
     <div class="footer-area">
         <div class="footer-top section-space-y-axis-100 text-black" data-bg-color="#e5ddcc">
@@ -664,92 +375,61 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="widget-item">
                             <div class="footer-logo pb-4">
-                                <a href="index.html">
-                                    <img src="public/frontend/images/logo/dark.png" alt="Logo">
+                                <a href="{{URL::to('/trang-chu')}}" class="header-logo">
+                                    <img style="width: 120px;margin:auto" src="{{asset('public/frontend/images/logo/logo2.png')}}" alt="Header Logo">
                                 </a>
                             </div>
-                            <p class="short-desc mb-2">Lorem ipsum dolor sit amet, consectet adipi elit, sed do eius tempor incididun ut labore gthydolore. </p>
                             <div class="widget-contact-info pb-6">
                                 <ul>
                                     <li>
                                         <i class="pe-7s-map-marker"></i>
-                                        184 Main Rd E, St Albans VIC 3021,
+                                        Đà Nẵng
                                     </li>
                                     <li>
                                         <i class="pe-7s-mail"></i>
-                                        <a href="mailto://info@example.com">info@example.com</a>
+                                        <a href="mailto://vinh44604@donga.edu.vn">vinh44604@donga.edu.vn</a>
                                     </li>
                                 </ul>
-                            </div>
-                            <div class="payment-method">
-                                <a href="javascript:void(0)">
-                                    <img src="public/frontend/images/payment/1.png" alt="Payment Method">
-                                </a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 offset-lg-1 col-md-6 pt-10 pt-lg-0">
                         <div class="widget-item">
-                            <h3 class="widget-title mb-5">Information</h3>
+                            <h3 class="widget-title mb-5">Danh Mục</h3>
                             <ul class="widget-list-item">
-                                <li>
-                                    <a href="javascript:void(0)">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">Shipping</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">Returns</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">Order Status</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">Gift Card Balance</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">Accessibility</a>
-                                </li>
+                                @foreach($category as $key => $cate)
+                                    <li>
+                                        <a href="{{URL::to('/danh-muc/'.$cate->slug_category_product)}}">{{$cate->category_name}}</a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-2 offset-lg-1 col-md-6 pt-10 pt-lg-0">
                         <div class="widget-item">
-                            <h3 class="widget-title mb-5">My Account</h3>
+                            <h3 class="widget-title mb-5">Tài khoản</h3>
                             <ul class="widget-list-item">
                                 <li>
-                                    <a href="javascript:void(0)">My Account</a>
+                                    <a href="javascript:void(0)">Đăng nhập</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0)">Checkout</a>
+                                    <a href="javascript:void(0)">Đăng ký</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0)">Validation</a>
+                                    <a href="javascript:void(0)">Giỏ hàng</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0)">Wishlist</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">Terms of Use</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">FAQ</a>
+                                    <a href="javascript:void(0)">Trang chủ</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 pt-10 pt-lg-0">
                         <div class="widget-item">
-                            <h3 class="widget-title mb-5">Newsletters</h3>
-                            <p class="short-desc">Lorem ipsum dolor sit amet, consectet adipi elit, sed do eius tempor.</p>
+                            <h3 class="widget-title mb-5">Cửa hàng</h3>
                         </div>
                         <div class="widget-form-area">
-                            <form class="widget-form" action="#">
-                                <input class="input-field" type="email" autocomplete="off" placeholder="Your Email">
-                                <div class="button-wrap pt-5">
-                                    <button class="btn btn-custom-size btn-primary btn-secondary-hover rounded-0" id="mc-submit">Send Mail</button>
-                                </div>
-                            </form>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d958.5701228058755!2d108.18045282918847!3d16.050927999305763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xdb404c09c51cf9a0!2zMTbCsDAzJzAzLjMiTiAxMDjCsDEwJzUxLjYiRQ!5e0!3m2!1sen!2s!4v1662982259059!5m2!1sen!2s" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>
@@ -760,7 +440,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="copyright">
-                            <span class="copyright-text text-white">© 2021 Harmic Made with <i class="fa fa-heart text-danger"></i> by  <a href="https://hasthemes.com/" target="_blank">HasThemes</a> </span>
+                            <span class="copyright-text text-white">Của hàng LÊ VĨNH SHOP chào quý khách<i class="fa fa-heart text-danger"></i>  </span>
                         </div>
                     </div>
                 </div>
@@ -784,22 +464,22 @@
 <!-- Global Vendor, plugins JS -->
 
 <!-- Vendor JS -->
-<script src="public/frontend/js/vendor/bootstrap.bundle.min.js"></script>
-<script src="public/frontend/js/vendor/jquery-3.5.1.min.js"></script>
-<script src="public/frontend/js/vendor/jquery-migrate-3.3.0.min.js"></script>
-<script src="public/frontend/js/vendor/modernizr-3.11.2.min.js"></script>
-<script src="public/frontend/js/vendor/jquery.waypoints.js"></script>
+<script src="{{asset('public/frontend/js/vendor/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/vendor/jquery-3.5.1.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/vendor/jquery-migrate-3.3.0.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/vendor/modernizr-3.11.2.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/vendor/jquery.waypoints.js')}}"></script>
 
 <!--Plugins JS-->
-<script src="public/frontend/js/plugins/wow.min.js"></script>
-<script src="public/frontend/js/plugins/jquery-ui.min.js"></script>
-<script src="public/frontend/js/plugins/swiper-bundle.min.js"></script>
-<script src="public/frontend/js/plugins/jquery.nice-select.js"></script>
-<script src="public/frontend/js/plugins/parallax.min.js"></script>
-<script src="public/frontend/js/plugins/jquery.magnific-popup.min.js"></script>
+<script src="{{asset('public/frontend/js/plugins/wow.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/plugins/jquery-ui.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/plugins/swiper-bundle.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/plugins/jquery.nice-select.js')}}"></script>
+<script src="{{asset('public/frontend/js/plugins/parallax.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/plugins/jquery.magnific-popup.min.js')}}"></script>
 
 <!--Main JS (Common Activation Codes)-->
-<script src="public/frontend/js/main.js"></script>
+<script src="{{asset('public/frontend/js/main.js')}}"></script>
 
 </body>
 

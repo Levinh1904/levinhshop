@@ -623,7 +623,7 @@ let referenceButtons = document.querySelector('[data-class]');
 window.addEventListener("resize", navbarColorOnResize);
 
 function navbarColorOnResize() {
-  if (window.innerWidth > 1200) {
+  if (window.innerWidth > 1400) {
     if (referenceButtons.classList.contains('active') && referenceButtons.getAttribute('data-class') === 'bg-transparent') {
       sidenav.classList.remove('bg-white');
     } else {
@@ -641,7 +641,7 @@ window.addEventListener("load", sidenavTypeOnResize);
 
 function sidenavTypeOnResize() {
   let elements = document.querySelectorAll('[onclick="sidebarType(this)"]');
-  if (window.innerWidth < 1200) {
+  if (window.innerWidth < 1400) {
     elements.forEach(function(el) {
       el.classList.add('disabled');
     });
